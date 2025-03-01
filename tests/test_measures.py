@@ -1,7 +1,7 @@
 import pytest
+from pathlib import Path
 import pandas as pd
 from src.cgmquantify import measures
-
 
 @pytest.mark.parametrize(
     "function_name, output_name, kwargs",
@@ -9,6 +9,7 @@ from src.cgmquantify import measures
         ("above_percent", "above_140", {"targets_above": [140]}),
         ("above_percent", "above_180", {"targets_above": [180]}),
         ("above_percent", "above_250", {"targets_above": [250]}),
+        ("range_glu", "range", {})
     ],
 )
 def test_cgm_measure_extraction(function_name, output_name, kwargs):
@@ -21,7 +22,7 @@ def test_cgm_measure_extraction(function_name, output_name, kwargs):
         kwargs (dict): Additional arguments for the function.
     """
     # Load CGM data
-    df = pd.read_csv("tests/data/cgm.csv")
+    df = pd.read_csv("./data/cgm.csv")
 
     # Get function dynamically from measures module
     func = getattr(measures, function_name, None)
@@ -31,7 +32,7 @@ def test_cgm_measure_extraction(function_name, output_name, kwargs):
     computed_result = func(df, **kwargs)
 
     # Load expected results
-    expected_df = pd.read_csv("tests/data/cgm_measures.csv")[["id", output_name]]
+    expected_df = pd.read_csv("./data/cgm_measures.csv")[["id", output_name]]
     assert set(computed_result["id"]) == set(
         expected_df["id"]
     ), f"Subject ID mismatch in {function_name}"
