@@ -2,7 +2,6 @@ import pytest
 import pandas as pd
 from src.cgmquantify import measures
 
-
 @pytest.mark.parametrize(
     "function_name, output_name, kwargs",
     [
