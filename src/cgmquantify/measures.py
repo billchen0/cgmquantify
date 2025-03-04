@@ -2,9 +2,9 @@ import pandas as pd
 from scipy import stats
 
 
-def mad_glu(df: pd.DataFrame) -> pd.DataFrame:
+def mad_glu(df: pd.DataFrame, constant) -> pd.DataFrame:
     """
-    Compute the mean absolute deviation (MAD) of glucose values for each subject.
+    Compute the median absolute deviation (MAD) of glucose values for each subject.
 
     Args:
         df (pd.DataFrame): DataFrame with 'id' and 'gl' columns (subject ID and glucose values).
@@ -19,10 +19,11 @@ def mad_glu(df: pd.DataFrame) -> pd.DataFrame:
     result = (
         df.groupby("id")["gl"]
         .agg(
-            lambda x: {f"MAD": stats.median_abs_deviation(x)}
+            lambda x: {f"MAD": stats.median_abs_deviation(x, scale = constant)}
         )
         .apply(pd.Series)
         .reset_index()
     )
+    print(result)
 
     return result  # Correctly formatted wide-format DataFrame
