@@ -19,9 +19,7 @@ def cv_glu(df: pd.DataFrame) -> pd.DataFrame:
     result = (
         df.groupby("id")["gl"]
         .agg(
-            lambda group: {
-                f"above_{t}": (group > t).mean() * 100 for t in targets_above
-            }
+            lambda x: {f"CV": (np.std(x)/np.nanmean(x))*100}
         )
         .apply(pd.Series)
         .reset_index()
