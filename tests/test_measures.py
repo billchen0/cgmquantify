@@ -6,7 +6,7 @@ from src.cgmquantify import measures
 @pytest.mark.parametrize(
     "function_name, output_name, kwargs",
     [
-        ("mad_glu", "MAD", {"scaling" [1.4826]}),
+        ("mad_glu", "MAD", {}),
     ],
 )
 def test_cgm_measure_extraction(function_name, output_name, kwargs):
