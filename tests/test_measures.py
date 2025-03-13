@@ -6,6 +6,9 @@ from src.cgmquantify import measures
 @pytest.mark.parametrize(
     "function_name, output_name, kwargs",
     [
+        ("above_percent", "above_140", {"targets_above": [140]}),
+        ("above_percent", "above_180", {"targets_above": [180]}),
+        ("above_percent", "above_250", {"targets_above": [250]}),
         ("sd_glu", "SD", {}),
         ("above_percent", "above_140", {"targets_above": [140]}),
         ("above_percent", "above_180", {"targets_above": [180]}),
