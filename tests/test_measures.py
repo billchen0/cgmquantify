@@ -6,6 +6,7 @@ from src.cgmquantify import measures
 @pytest.mark.parametrize(
     "function_name, output_name, kwargs",
     [
+        ("sd_glu", "SD", {}),
         ("above_percent", "above_140", {"targets_above": [140]}),
         ("above_percent", "above_180", {"targets_above": [180]}),
         ("above_percent", "above_250", {"targets_above": [250]}),
@@ -21,8 +22,7 @@ def test_cgm_measure_extraction(function_name, output_name, kwargs):
         kwargs (dict): Additional arguments for the function.
     """
     # Load CGM data
-    #df = pd.read_csv("./data/cgm.csv") #Use locally
-    df = pd.read_csv("./data/cgm.csv")
+    df = pd.read_csv("tests/data/cgm.csv")
 
     # Get function dynamically from measures module
     func = getattr(measures, function_name, None)

@@ -14,8 +14,7 @@ def sd_glu(df: pd.DataFrame) -> pd.DataFrame:
     if not {"id", "gl"}.issubset(df.columns):
         raise ValueError("DataFrame must contain 'id' and 'gl' columns.")
 
-    # Group by 'id' and compute range for each subject.
-
+    # Group by 'id' and compute range for each subject
     result = (
         df.groupby("id")["gl"]
         .agg(
