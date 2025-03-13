@@ -22,7 +22,7 @@ def test_cgm_measure_extraction(function_name, output_name, kwargs):
         kwargs (dict): Additional arguments for the function.
     """
     # Load CGM data
-    df = pd.read_csv("tests/data/cgm.csv")
+    df = pd.read_csv("./data/cgm.csv")
 
     # Get function dynamically from measures module
     func = getattr(measures, function_name, None)
@@ -32,7 +32,7 @@ def test_cgm_measure_extraction(function_name, output_name, kwargs):
     computed_result = func(df, **kwargs)
 
     # Load expected results
-    expected_df = pd.read_csv("tests/data/cgm_measures.csv")[["id", output_name]]
+    expected_df = pd.read_csv("./data/cgm_measures.csv")[["id", output_name]]
     assert set(computed_result["id"]) == set(
         expected_df["id"]
     ), f"Subject ID mismatch in {function_name}"
