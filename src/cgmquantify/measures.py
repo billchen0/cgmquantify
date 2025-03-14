@@ -1,13 +1,13 @@
 import pandas as pd
+import numpy as np
 
 
-def above_percent(df: pd.DataFrame, targets_above=[140, 180, 250]) -> pd.DataFrame:
+def cv_glu(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Compute the percentage of glucose values above given thresholds for each subject.
+    Compute the coefficient of variation (SD/mean) for each subject.
 
     Args:
         df (pd.DataFrame): DataFrame with 'id' and 'gl' columns (subject ID and glucose values).
-        targets_above (list): List of threshold values to compare glucose levels.
 
     Returns:
         pd.DataFrame: A DataFrame with one row per subject, each threshold as a separate column.
@@ -19,9 +19,7 @@ def above_percent(df: pd.DataFrame, targets_above=[140, 180, 250]) -> pd.DataFra
     result = (
         df.groupby("id")["gl"]
         .agg(
-            lambda group: {
-                f"above_{t}": (group > t).mean() * 100 for t in targets_above
-            }
+            lambda x: {f"CV": (np.std(x)/np.nanmean(x))*100}
         )
         .apply(pd.Series)
         .reset_index()
