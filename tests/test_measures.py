@@ -1,11 +1,13 @@
 import pytest
 import pandas as pd
+from scipy import stats
 from src.cgmquantify import measures
 
 
 @pytest.mark.parametrize(
     "function_name, output_name, kwargs",
     [
+        ("mad_glu", "MAD", {}),
         ("sd_glu", "SD", {}),
         ("above_percent", "above_140", {"targets_above": [140]}),
         ("above_percent", "above_180", {"targets_above": [180]}),
