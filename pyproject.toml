@@ -10,7 +10,7 @@ packages = [{include = "cgmquantify", from = "src"}]
 python = ">=3.9"  # Lower Python requirement
 pandas = "^2.0.0"
 numpy = "^1.24.0"
-scipy = "^1.15.2"
+scipy = "^1.7.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.0"
