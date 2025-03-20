@@ -2,14 +2,14 @@ import pytest
 import pandas as pd
 from src.cgmquantify import measures
 
+
 @pytest.mark.parametrize(
     "function_name, output_name, kwargs",
     [
-        ("cv_glu", "CV", {}),
+        ("sd_glu", "SD", {}),
         ("above_percent", "above_140", {"targets_above": [140]}),
         ("above_percent", "above_180", {"targets_above": [180]}),
         ("above_percent", "above_250", {"targets_above": [250]}),
-        #("mag_change_per_time", "MAG", {})
     ],
 )
 def test_cgm_measure_extraction(function_name, output_name, kwargs):
@@ -22,7 +22,6 @@ def test_cgm_measure_extraction(function_name, output_name, kwargs):
         kwargs (dict): Additional arguments for the function.
     """
     # Load CGM data
-    #df = pd.read_csv("./data/cgm.csv") #Use locally
     df = pd.read_csv("tests/data/cgm.csv")
 
     # Get function dynamically from measures module
@@ -33,7 +32,6 @@ def test_cgm_measure_extraction(function_name, output_name, kwargs):
     computed_result = func(df, **kwargs)
 
     # Load expected results
-    #expected_df = pd.read_csv("./data/cgm_measures.csv")[["id", output_name]] #Use locally
     expected_df = pd.read_csv("tests/data/cgm_measures.csv")[["id", output_name]]
     assert set(computed_result["id"]) == set(
         expected_df["id"]
