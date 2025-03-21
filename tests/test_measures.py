@@ -1,5 +1,6 @@
 import pytest
 import pandas as pd
+from scipy import stats
 from src.cgmquantify import measures
 
 @pytest.mark.parametrize(
