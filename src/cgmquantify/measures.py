@@ -102,6 +102,7 @@ def mad_glu(df: pd.DataFrame) -> pd.DataFrame:
         .apply(pd.Series)
         .reset_index()
     )
+
     return result
 
 def iqr_glu(df: pd.DataFrame) -> pd.DataFrame:
