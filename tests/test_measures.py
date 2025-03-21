@@ -9,7 +9,6 @@ from src.cgmquantify import measures
         ("above_percent", "above_140", {"targets_above": [140]}),
         ("above_percent", "above_180", {"targets_above": [180]}),
         ("above_percent", "above_250", {"targets_above": [250]}),
-        #("mag_change_per_time", "MAG", {})
     ],
 )
 def test_cgm_measure_extraction(function_name, output_name, kwargs):
