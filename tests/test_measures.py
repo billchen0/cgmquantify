@@ -7,6 +7,11 @@ from src.cgmquantify import measures
     "function_name, output_name, kwargs",
     [
         ("iqr_glu", "IQR", {}),
+        ("mad_glu", "MAD", {}),
+        ("sd_glu", "SD", {}),
+        ("above_percent", "above_140", {"targets_above": [140]}),
+        ("above_percent", "above_180", {"targets_above": [180]}),
+        ("above_percent", "above_250", {"targets_above": [250]}),
     ],
 )
 def test_cgm_measure_extraction(function_name, output_name, kwargs):
