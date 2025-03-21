@@ -6,6 +6,7 @@ from src.cgmquantify import measures
 @pytest.mark.parametrize(
     "function_name, output_name, kwargs",
     [
+        ("cv_glu", "CV", {}),
         ("iqr_glu", "IQR", {}),
         ("mad_glu", "MAD", {}),
         ("sd_glu", "SD", {}),
