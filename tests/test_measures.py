@@ -6,6 +6,11 @@ from src.cgmquantify import measures
 @pytest.mark.parametrize(
     "function_name, output_name, kwargs",
     [
+        ("quantile_glu", "X0", {"quantiles": [0]}),
+        ("quantile_glu", "X25", {"quantiles": [25]}),
+        ("quantile_glu", "X50", {"quantiles": [50]}),
+        ("quantile_glu", "X75", {"quantiles": [75]}),
+        ("quantile_glu", "X100", {"quantiles": [100]}),
         ("range_glu", "range", {}),
         ("cv_glu", "CV", {}),
         ("iqr_glu", "IQR", {}),
