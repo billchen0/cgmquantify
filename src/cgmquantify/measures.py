@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from scipy import stats
 
 def above_percent(df: pd.DataFrame, targets_above=[140, 180, 250]) -> pd.DataFrame:
     """
@@ -101,6 +102,7 @@ def mad_glu(df: pd.DataFrame) -> pd.DataFrame:
         .apply(pd.Series)
         .reset_index()
     )
+
 
     return result
 

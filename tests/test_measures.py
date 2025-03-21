@@ -1,11 +1,13 @@
 import pytest
 import pandas as pd
+from scipy import stats
 from src.cgmquantify import measures
 
 @pytest.mark.parametrize(
     "function_name, output_name, kwargs",
     [
         ("range_glu", "range", {}),
+        ("cv_glu", "CV", {}),
         ("iqr_glu", "IQR", {}),
         ("mad_glu", "MAD", {}),
         ("sd_glu", "SD", {}),
@@ -14,6 +16,7 @@ from src.cgmquantify import measures
         ("above_percent", "above_250", {"targets_above": [250]}),
     ],
 )
+
 def test_cgm_measure_extraction(function_name, output_name, kwargs):
     """
     Generalized test for CGM measure extraction functions that return results as columns.
