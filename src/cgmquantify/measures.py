@@ -102,4 +102,85 @@ def mad_glu(df: pd.DataFrame) -> pd.DataFrame:
         .apply(pd.Series)
         .reset_index()
     )
+
     return result
+
+def iqr_glu(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Compute the distance between 25th and 75th percentile of glucose values for each subject.
+
+    Args:
+        df (pd.DataFrame): DataFrame with 'id' and 'gl' columns (subject ID and glucose values).
+
+    Returns:
+        pd.DataFrame: A DataFrame with one row per subject.
+    """
+    if not {"id", "gl"}.issubset(df.columns):
+        raise ValueError("DataFrame must contain 'id' and 'gl' columns.")
+
+    # Group by 'id' and compute range for each subject
+
+    result = (
+        df.groupby("id")["gl"]
+        .agg(
+            lambda x: {f"IQR": np.nanquantile(x,0.75)-np.nanquantile(x,0.25)}
+        )
+        .apply(pd.Series)
+        .reset_index()
+    )
+
+    return result
+
+def range_glu(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Compute the range of glucose values (max-min) for each subject.
+
+    Args:
+        df (pd.DataFrame): DataFrame with 'id' and 'gl' columns (subject ID and glucose values).
+
+    Returns:
+        pd.DataFrame: A DataFrame with one row per subject.
+    """
+    if not {"id", "gl"}.issubset(df.columns):
+        raise ValueError("DataFrame must contain 'id' and 'gl' columns.")
+
+    # Group by 'id' and compute range for each subject
+
+    result = (
+        df.groupby("id")["gl"]
+        .agg(
+            lambda x: {f"range": np.nanmax(x)-np.nanmin(x)}
+        )
+        .apply(pd.Series)
+        .reset_index()
+    )
+
+    return result
+
+def quantile_glu(df: pd.DataFrame, quantiles=[0, 25, 50, 75, 100]) -> pd.DataFrame:
+    """
+    Compute the quantiles for each subject.
+
+    Args:
+        df (pd.DataFrame): DataFrame with 'id' and 'gl' columns (subject ID and glucose values).
+
+    Returns:
+        pd.DataFrame: A DataFrame with one row per subject, each a quantile as a separate column.
+    """
+    if not {"id", "gl"}.issubset(df.columns):
+        raise ValueError("DataFrame must contain 'id' and 'gl' columns.")
+
+    # Compute the quantile values for each subject
+    result = (
+        df.groupby("id")["gl"]
+        .agg(
+            lambda x: {
+                f"X{t}": np.nanquantile(x,t/100) for t in quantiles
+            }
+        )
+        .apply(pd.Series)
+        .reset_index()
+    )
+    print(result)
+    return result  # Correctly formatted wide-format DataFrame
+
