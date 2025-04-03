@@ -184,6 +184,7 @@ def quantile_glu(df: pd.DataFrame, quantiles=[0, 25, 50, 75, 100]) -> pd.DataFra
     print(result)
     return result  # Correctly formatted wide-format DataFrame
 
+
 def j_index(df: pd.DataFrame) -> pd.DataFrame:
     """
     Compute the j_index for each subject.
@@ -211,4 +212,5 @@ def j_index(df: pd.DataFrame) -> pd.DataFrame:
     )
 
     return result  # Correctly formatted wide-format DataFrame
+
 
